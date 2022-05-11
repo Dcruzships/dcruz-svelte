@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { emojis } from "./emojis";
+	import { emojis } from './emojis';
 
 	let emoji = shuffle(emojis);
 
@@ -14,10 +14,7 @@
 			currentIndex--;
 
 			// And swap it with the current element.
-			[array[currentIndex], array[randomIndex]] = [
-				array[randomIndex],
-				array[currentIndex],
-			];
+			[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
 		}
 
 		return array;
@@ -32,8 +29,8 @@
 <div id="front" class="flexin">
 	<div id="bio" class="flexin">
 		<p>
-			Hi! I'm a full-stack web developer, audio engineer, and published author
-			based in Frisco, Texas 🌆
+			Hi! I'm a full-stack software developer, audio engineer, and published author based in Plano,
+			Texas 🌆
 		</p>
 	</div>
 </div>
@@ -49,7 +46,7 @@
 		position: absolute;
 		right: 1000px;
 		bottom: 1000px;
-        padding-top: 10px;
+		padding-top: 10px;
 	}
 
 	.emo {
@@ -57,7 +54,7 @@
 	}
 
 	p {
-		font-family: "Montserrat", sans-serif;
+		font-family: 'Montserrat', sans-serif;
 		width: 80%;
 		font-size: 4rem;
 		padding-bottom: 7vh;
@@ -68,7 +65,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-        height: 100%;
+		height: 100%;
 	}
 
 	@supports ((background-image: -moz-element(#emoji))) {
@@ -84,8 +81,8 @@
 			background-attachment: fixed;
 		}
 
-        #emoji {
-            padding-top: 0px;
-        }
+		#emoji {
+			padding-top: 0px;
+		}
 	}
 </style>

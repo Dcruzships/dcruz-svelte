@@ -34,7 +34,7 @@
 	</article>
 </main>
 
-<style>
+<style lang="scss">
 	:root {
 		font-family: "Open Sans", sans-serif;
 	}
@@ -55,10 +55,47 @@
 		padding: 0;
 		margin: 0;
 		scroll-snap-type: y mandatory;
-		overflow-y: scroll;
 		scroll-behavior: smooth;
 		max-height: 100vh;
 		scroll-padding-top: 7vh;
+		overflow-x: hidden;
+	}
+
+	#music {
+		position: relative;
+	}
+
+	// Chrome + IE + Opera
+	@supports (overflow-y: overlay) {
+		main {
+			overflow-y: overlay;
+		}
+
+		main::-webkit-scrollbar {
+			width: 15px;
+			height: 10px;
+		}
+
+		main::-webkit-scrollbar-thumb {
+			background-image: linear-gradient(180deg, #d03643 0%, rgb(35, 41, 59) 99%);
+			border-radius: 100px;
+			border: 2px solid transparent;
+			background-clip: content-box;
+		}
+
+		main::-webkit-scrollbar-track {
+			border-radius: 100px;
+		}
+	}
+
+	// Firefox
+	@supports not (overflow-y: overlay) {
+		main {
+			overflow-y: scroll;
+			scrollbar-color: black rgba(255, 255, 255, 0);
+			scrollbar-gutter: stable;
+			scrollbar-width: thin;
+		}
 	}
 
 	#banner {

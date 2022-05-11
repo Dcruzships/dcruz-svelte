@@ -28,7 +28,7 @@
 	let waveRange: number = 0;
 	let maxRadius = 200;
 
-	let mousePos = { x: 500, y: 250 };
+	export let mousePos = { x: 500, y: 250 };
 
 	let width: number = 0;
 	let height: number = 0;
@@ -228,7 +228,7 @@
 	}
 
 	function resizeCanvas(): void {
-		const viz = document.querySelector("#visualizer");
+		const viz = document.querySelector("#musicBox");
 		if (viz) {
 			width = viz.clientWidth + 4;
 			height = viz.clientHeight + 4;
@@ -256,7 +256,6 @@
 
 	function onScroll() {
 		if(isAnimating && !isPlaying) {
-			
 			beginInactive();
 		}
 	}
@@ -265,14 +264,14 @@
 <svelte:window on:resize={onResize} />
 <canvas
 	bind:this={canvasElement}
-	on:mousemove={(e) => onMousemove(e)}
 	{width}
 	{height}
 />
 
 <style>
 	canvas {
-		border: solid;
+		border-top: solid;
+		border-bottom: solid;
 		width: 100%;
 		height: 100%;
 	}
