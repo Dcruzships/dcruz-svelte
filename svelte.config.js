@@ -11,7 +11,6 @@ const config = {
         adapter: adapter({
             // default options are shown
             pages: 'docs',
-            fallback: 'index.html',
             precompress: false
         }),
         prerender: {
