@@ -20,7 +20,7 @@
 	<Navbar />
 
 	<article id="projects">
-		<Projects {scrollEvent} />
+		<Projects />
 	</article>
 	<article id="music">
 		<Music {scrollEvent} />

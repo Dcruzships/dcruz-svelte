@@ -54,7 +54,7 @@
 		vid.play();
 	});
 
-	export let scrollEvent: any;
+	// export let scrollEvent: any;
 	
 </script>
 
