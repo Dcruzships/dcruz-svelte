@@ -22,8 +22,6 @@
 	let gainNode!: GainNode;
 
 	let invert: boolean = false;
-	let noise: boolean = false;
-	let plain: boolean = true;
 	let waveSpace: number = 0;
 	let waveRange: number = 0;
 	let maxRadius = 200;
@@ -146,18 +144,32 @@
 		const halfH = height / 2;
 		const width = canvasElement.width;
 
+		const red = makeColor(255, 0, 0, 255);
+		const blue = makeColor(0, 0, 255, 255);
+		const sun = makeColor(255, 111, 111, 1);
+
+		const xRatio = mousePos.x / window.innerWidth;
+		const yRatio = mousePos.y / window.innerHeight;
+
+		// const midpoint = (505 * xRatio) + 55;
+		// const highPoint = halfH / 2 + (yRatio * 300);
+		const midpoint = 15;
+		const highPoint = halfH;
+
 		// DRAW!
 		drawCtx.clearRect(0, 0, width, height);
 
 		waveSpace = (mousePos.x / window.innerWidth) * 8;
 		waveRange = (mousePos.y / window.innerHeight) * 255;
 
+		// viewPos = (mousePos.x / window.innerWidth) * 
+
 		// loop through the data and draw!
 		audioData.map((data, i) => {
-			const base = (i + 0.5) * (10 + 5);
+			const base = (i + 0.5) * midpoint;
 			drawCtx.beginPath();
-			drawCtx.strokeStyle = makeColor(0, 0, 255, 255);
-			drawCtx.moveTo(i * (10 + 5), height / 2);
+			drawCtx.strokeStyle = blue;
+			drawCtx.moveTo(i * midpoint, highPoint);
 
 			// Top shapes
 			switch (data > 156) {
@@ -171,16 +183,16 @@
 					break;
 			}
 
-			drawCtx.lineTo((i + 1) * (10 + 5), halfH);
+			drawCtx.lineTo((i + 1) * midpoint, highPoint);
 			drawCtx.stroke();
 			drawCtx.closePath();
 
 			drawCtx.beginPath();
-			drawCtx.strokeStyle = makeColor(255, 0, 0, 255);
+			drawCtx.strokeStyle = red;
 			if (invert) {
-				drawCtx.strokeStyle = makeColor(0, 0, 255, 255);
+				drawCtx.strokeStyle = blue;
 			}
-			drawCtx.moveTo(i * (10 + 5), halfH);
+			drawCtx.moveTo(i * midpoint, highPoint);
 
 			// Reflections
 			switch (data < 156) {
@@ -194,7 +206,7 @@
 					break;
 			}
 
-			drawCtx.lineTo((i + 1) * (10 + 5), halfH);
+			drawCtx.lineTo((i + 1) * (midpoint), highPoint);
 			drawCtx.stroke();
 			drawCtx.closePath();
 
@@ -203,13 +215,13 @@
 			const circleRadius = percent * maxRadius + waveRange;
 
 			drawCtx.beginPath();
-			drawCtx.fillStyle = makeColor(255, 111, 111, 1);
+			drawCtx.fillStyle = sun;
 			drawCtx.arc(width, 0, circleRadius * 0.5, 0, 2 * Math.PI, false);
 			drawCtx.stroke();
 			drawCtx.closePath();
 
 			drawCtx.beginPath();
-			drawCtx.fillStyle = makeColor(255, 111, 111, 1);
+			drawCtx.fillStyle = sun;
 			drawCtx.arc(width, 0, circleRadius * 0.5, 0, 2 * Math.PI, false);
 			drawCtx.stroke();
 			drawCtx.closePath();
@@ -245,10 +257,6 @@
 
 	function onResize() {
 		resizeCanvas();
-	}
-
-	function onMousemove(event: MouseEvent) {
-		mousePos = { x: event.clientX, y: event.clientY };
 	}
 
 	export let scrollEvent: any;

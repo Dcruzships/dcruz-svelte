@@ -1,14 +1,18 @@
 <script lang="ts">
 	import Typed from './Typed.svelte';
-	import { HomeIcon, PackageIcon, MusicIcon, EditIcon, MailIcon } from 'svelte-feather-icons';
+	import { HomeIcon, PackageIcon, MusicIcon, EditIcon, MailIcon, MenuIcon } from 'svelte-feather-icons';
+	import { fly } from 'svelte/transition';
+
+	let show: boolean = false;
 </script>
 
-<nav class="sticky">
-	<span>
+<nav class="sticky" on:mouseenter={() => show = true} on:mouseleave={() => show = false}>
+	<span id="typer">
 		<Typed />
 	</span>
 	<span>
-		<ul>
+		{#if show}
+		<ul in:fly="{{ x: 600, duration: 400 }}" out:fly="{{ x: 600, duration: 400 }}" class="buttons">
 			<li>
 				<HomeIcon size="2x" />
 				<a href="#banner">Home</a>
@@ -21,15 +25,20 @@
 				<MusicIcon size="2x" />
 				<a href="#music">Music</a>
 			</li>
-			<li>
+			<!-- <li>
 				<EditIcon size="2x" />
 				<a href="/blog">Blog</a>
-			</li>
+			</li> -->
 			<li>
 				<MailIcon size="2x" />
 				<a href="#contact">Contact</a>
 			</li>
 		</ul>
+		{:else}
+		<div class="buttons" in:fly="{{x: 400, delay: 200, duration: 300}}">
+			<MenuIcon size="2x" />
+		</div>
+		{/if}
 	</span>
 </nav>
 
@@ -51,24 +60,23 @@
 		height: 8vh;
 		z-index: 100;
         overflow: hidden;
-
-        &:hover {
-            ul {
-                padding-left: 0;
-            }
-		}
 	}
 
 	span {
 		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+
+		&:last-of-type {
+			justify-content: flex-end;
+		}
 	}
 
-	ul {
+	.buttons {
 		display: flex;
         justify-content: flex-end;
-        padding-left: 200%;
         overflow: hidden;
-        transition: 500ms ease;
 	}
 
 	li {

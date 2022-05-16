@@ -6,10 +6,13 @@
 		RepeatIcon,
 		ShuffleIcon,
 		SkipBackIcon,
-		SkipForwardIcon
+		SkipForwardIcon,
+		ChevronUpIcon,
+		ChevronDownIcon
 	} from 'svelte-feather-icons';
 	import { fade } from 'svelte/transition';
-	import type { Track } from './tracks';
+	import { type Track, type Album, tracks } from './tracks';
+	import { albums } from './tracks';
 	import RangeSlider from 'svelte-range-slider-pips';
 
 	export let track: Track;
@@ -21,12 +24,32 @@
 
 	let isSeeking: boolean = false;
 
+	let list: boolean = false;
+	let selected: Album = albums[0];
+	let selectedTracks: Track[] = tracks.filter(track => {
+		return selected.name === track.album;
+	});
+
+	$: selected, onSelect();
+
+	function onSelect() {
+		selectedTracks = tracks.filter(track => {
+			return selected.name === track.album;
+		});
+	}
+
 	// Event dispatcher + command function to relay actions back to Music.svelte
 	const dispatch = createEventDispatcher();
 
 	function command(cmd: string) {
 		dispatch('message', {
 			cmd: cmd
+		});
+	}
+
+	function chooseTrack(track: string) {
+		dispatch('message', {
+			track: track
 		});
 	}
 
@@ -69,16 +92,12 @@
 		// If it's more than an hour, return the hour too. Otherwise, just the min:sec
 		return `${minutes}:${seconds}`;
 	}
-
-	function slide(e) {
-		command(e.detail.value);
-		isSeeking = false;
-	}
 </script>
 
 <div ref="box" id="controlsBox">
 	<div>
 		{#if showControls}
+			{#if !list}
 			<div id="icons" transition:fade>
 				<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
 					<ShuffleIcon size="100" />
@@ -100,6 +119,32 @@
 					<RepeatIcon size="100" />
 				</span>
 			</div>
+			{:else if list}
+			<div id="list" transition:fade>
+				<div id="albums">
+					<ul>						
+						{#each albums as album}
+						<li on:click={() => {selected = album}} class="{selected === album ? 'active' : ''}">
+							{album.name}
+						</li>
+						{/each}
+					</ul>
+				</div>
+				<div id="tracklist">
+					<span>
+							<img src={selected.src} alt="" />
+							<h3>{selected.name} by {selected.artist}</h3>
+					</span>
+					<ol>
+						{#each selectedTracks as listTrack}
+						<li on:click={() => {chooseTrack(listTrack.name)}} class="{track.name === listTrack.name ? 'active' : ''}">
+							{listTrack.name}
+						</li>
+						{/each}
+					</ol>
+				</div>
+			</div>
+			{/if}
 		{/if}
 	</div>
 	<div id="seeker">
@@ -107,6 +152,13 @@
 			<img src={track.img} alt="" />
 		</div>
 		<div>
+			<div class="wide hover" on:click={() => {list = !list}}>
+				{#if !list}
+				<ChevronUpIcon size="50" />
+				{:else}
+				<ChevronDownIcon size="50" />
+				{/if}
+			</div>
 			<div>
 				{track.artist} - {track.name}
 			</div>
@@ -180,6 +232,7 @@
 		align-items: flex-end;
 		margin-bottom: 12px;
 		justify-content: flex-start;
+		border-top: solid;
 
 		div:last-child {
 			display: flex;
@@ -194,8 +247,9 @@
 	}
 
 	img {
-		width: 100px;
-		height: 100px;
+		width: 90px;
+		height: 90px;
+		margin: 10px;
 		border: solid;
 	}
 
@@ -214,6 +268,64 @@
 				flex: 10;
 				display: block;
 			}
+		}
+	}
+
+	.wide {
+		width: 100%;
+	}
+
+	.hover {
+		transition: 0.3s;
+		&:hover {
+			color: gray;
+			transform: scale(1.3);
+		}
+
+		&:active {
+			color: red;
+		}
+	}
+
+	#list {
+		width: 100%;
+		background-color: rgba(224, 226, 198, .8);
+
+		#albums, #tracklist {
+			display: block;
+			height: 100%;
+			padding: 10px;
+		}
+
+		li {
+			&:hover {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}
+
+		div:first-child {
+			flex: .3;
+			border-right: solid;
+			li {
+				list-style: symbols(cyclic ">");
+				text-align: start;
+				padding: 5px;
+			}
+
+			.active {
+				font-weight: bold;
+				list-style: symbols(cyclic ">>");
+			}
+		}
+
+		div:last-child {
+			flex: 1;
+		}
+
+		.active {
+			font-weight: bold;
+			list-style: symbols(cyclic ">>");
 		}
 	}
 </style>

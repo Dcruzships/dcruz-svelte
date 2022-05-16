@@ -53,7 +53,7 @@
 	function randomTrack(): number {
 		let newRand = Math.floor(Math.random() * (songs.length - 1));
 		if (newRand === trackNum) {
-			newRand = randomTrack();
+			return randomTrack();
 		}
 		return newRand;
 	}
@@ -105,11 +105,29 @@
 		audioPlayer.currentTime = time;
 	}
 
+	function chooseTrack(trackName: string): void {
+		// Pause the track if it's playing, then push the track num to the array
+		if (isPlaying) playPause();
+
+		lastTrackArray.push(trackNum);
+
+		trackNum = songs.findIndex(track => {
+			return track.name === trackName;
+		});
+		track = songs[trackNum];
+		audioPlayer.load();
+		if (!isPlaying) playPause();
+	}
+
 	/**
 	 * Callback for all Controls functions
 	 * @param event the message
 	 */
 	function handleCmd(event): void {
+		if(event.detail.track) {
+			chooseTrack(event.detail.track);
+			return;
+		}
 		switch (event.detail.cmd) {
 			case 'playPause':
 				playPause();

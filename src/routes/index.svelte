@@ -1,5 +1,6 @@
 <script lang="ts">
-    import Navbar from "../lib/nav/Navbar.svelte";
+    import Contact from "$lib/panels/contact/Contact.svelte";
+	import Navbar from "../lib/nav/Navbar.svelte";
 	import Banner from "../lib/panels/banner/Banner.svelte";
 	import Music from "../lib/panels/music/Music.svelte";
 	import Projects from "../lib/panels/projects/Projects.svelte";
@@ -25,12 +26,7 @@
 		<Music {scrollEvent} />
 	</article>
 	<article id="contact">
-		<p class="lorem">
-			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam culpa
-			aliquid quis aut, laboriosam labore quas molestias consectetur sequi
-			debitis, delectus suscipit iusto veniam adipisci similique quae laborum
-			omnis quibusdam.
-		</p>
+		<Contact />
 	</article>
 </main>
 
@@ -102,9 +98,5 @@
 		display: flex;
 		flex-direction: column;
 		padding-top: 0;
-	}
-
-	.lorem {
-		font-size: xx-large;
 	}
 </style>
