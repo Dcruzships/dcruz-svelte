@@ -10,7 +10,7 @@
 	} from 'svelte-feather-icons';
 	import ScrollText from './ScrollText.svelte';
 
-	let src: string = '/static/img/bio1.png';
+	let src: string = 'img/bio1.png';
 	let numBio: number = 1;
 
 	function randNum(): number {
@@ -24,7 +24,7 @@
 		}
 
 		numBio = dif;
-		src = `/static/img/bio${dif}.png`;
+		src = `img/bio${dif}.png`;
 	}
 
     randBio();
