@@ -61,6 +61,10 @@
 		position: relative;
 	}
 
+	#projects {
+		overflow: hidden;
+	}
+
 	// Chrome + IE + Opera
 	@supports (overflow-y: overlay) {
 		main {
