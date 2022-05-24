@@ -146,7 +146,6 @@
 				</div>
 			</div>
 			{/if}
-		{:else}
 		{/if}
 	</div>
 	<div id="seeker">
