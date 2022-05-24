@@ -1,307 +1,270 @@
 export class Track {
-  src: string;
-  artist: string;
-  name: string;
-  album: string;
-  img: string;
+	src: string;
+	artist: string;
+	name: string;
+	album: string;
+	img: string;
+  arrAlbum: Album;
 
-  constructor(src: string, artist: string, name: string, album: string, img: string)
-  {
-    this.src = src;
-    this.artist = artist;
-    this.name = name;
-    this.album = album;
-    this.img = img;
-  }
+	constructor(src: string, name: string, album: string) {
+    this.arrAlbum = albums.find(el => el.name === album);
+    if(!this.arrAlbum) {
+      this.arrAlbum = new Album(album, 'sailboat', 'Captain Brando!');
+      albums.push(this.arrAlbum);
+    }
+		this.src = (src.length > 65) ? src : 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/' + src + '.mp3';
+		this.artist = this.arrAlbum.artist;
+		this.name = name;
+		this.album = this.arrAlbum.name;
+		this.img = this.arrAlbum.src;
+	}
 }
 
 export class Album {
-  name: string;
-  src: string;
-  artist: string;
+	name: string;
+	src: string;
+	artist: string;
+  tracks: Track[];
 
-  constructor(name: string, src: string, artist?: string) {
-    this.name = name;
-    this.src = src;
-    this.artist = (artist) ? artist : name;
-  }
+	constructor(name: string, src: string, artist?: string, tracks?: string[]) {
+		this.name = name;
+		this.src = 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/' + src + '.png';
+		this.artist = artist ? artist : name;
+	}
 }
 
-export const albums: Album[] = [
-  new Album("2022", 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/paint.png', "Captain Brando!"),
-  new Album("ily", 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/ily.png', "Captain Brando!"),
-  new Album("RIP", 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/rip.png', "Captain Brando!"),
-  new Album("Altona Meadows", 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png', "Altona Meadows"),
-  new Album("Cigs Inside Live", 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/cigs.png', "Cigs Inside"),
-  new Album("Criss Cross Apple Sauwce", 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/dead.png', "brando & theo"),
-  new Album("3RR0R 404", 'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/sailboat.png', "???"),
+export let albums: Album[] = [
+	new Album(
+		'2022',
+		'paint',
+		'Captain Brando!'
+	),
+	new Album(
+		'ily',
+    'ily',
+		'Captain Brando!'
+	),
+	new Album(
+		'RIP',
+    'rip',
+		'Captain Brando!'
+	),
+	new Album(
+		'Altona Meadows (<= 2016)',
+		'bbetc',
+		'Altona Meadows'
+	),
+	new Album(
+		'Cigs Inside Live',
+		'cigs',
+		'Cigs Inside'
+	),
+	new Album(
+		'Criss Cross Apple Sauwce',
+		'dead',
+		'brando & theo'
+	),
+	new Album(
+		'3RR0R 404',
+		'sailboat',
+		'???'
+	)
 ];
 
 export const tracks: Track[] = [
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/IDKOK.mp3',
-    'Captain Brando!',
-    'IDK OK',
-    "ily",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/ily.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/Instagram.mp3',
-    'Captain Brando!',
-    'Instagram',
-    'ily',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/ily.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/him.mp3',
-    'Captain Brando!',
-    'him',
-    'ily',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/ily.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/october13.mp3',
-    'Captain Brando!',
-    'October 13th',
-    'ily',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/ily.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/him(demo).mp3',
-    'Captain Brando!',
-    'him (demo)',
-    'ily',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/ily.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/down3-2.mp3',
-    'Captain Brando!',
-    'down3-2',
-    'RIP',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/rip.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/paralyzed.mp3',
-    'Captain Brando!',
-    'Paralyzed Paraplegic',
-    'RIP',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/rip.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/GiveIn.mp3',
-    'Captain Brando!',
-    'GiveIn_444',
-    'RIP',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/rip.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/mental.mp3',
-    'Captain Brando!',
-    'mental health disorders',
-    'RIP',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/rip.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/stab.mp3',
-    'Captain Brando!',
-    'stab.wav',
-    'RIP',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/rip.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/WAITAMINUTE.mp3',
-    'Captain Brando!',
-    'WAITAMINUTE',
-    'RIP',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/rip.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bargainbin.mp3',
-    'Altona Meadows',
-    'Bargain Bin',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bargainbin.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bbetc.mp3',
-    'Altona Meadows',
-    'Better Better, etc.',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/bullshit.mp3',
-    'Altona Meadows',
-    'bullshit.mp3',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/jam2.mp3',
-    'Altona Meadows',
-    'jam2.mp3',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/feel.mp3',
-    'Altona Meadows',
-    'Feel It Still (remix)',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/passion.mp3',
-    'Altona Meadows',
-    'Passionfruit (remix)',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/assignment8.mp3',
-    'Altona Meadows',
-    'assignment8.mp3',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/panama.mp3',
-    'Altona Meadows',
-    'The Panama Papers',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/kenny.mp3',
-    'Altona Meadows',
-    'kenny.mp3',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/better44.mp3',
-    'Altona Meadows',
-    'better44.mp3',
-    'Altona Meadows',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bulkhead.mp3',
-    'Captain Brando!',
-    'BULKHEAD',
-    '2022',
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/bbetc.png',
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/alone.mp3',
-    'Cigs Inside',
-    'Alone (Mac DeMarco Cover)',
-    "Cigs Inside Live",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/cigs.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/how.mp3',
-    'Cigs Inside',
-    'How?',
-    "Cigs Inside Live",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/cigs.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/work.mp3',
-    'Cigs Inside',
-    'Work This Time (King Gizzard Cover)',
-    "Cigs Inside Live",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/cigs.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/liquor.mp3',
-    'Cigs Inside',
-    'Liquor Laced & Lucid',
-    "Cigs Inside Live",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/cigs.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/sleepwalk.mp3',
-    'Cigs Inside',
-    'Sleepwalk With Me',
-    "Cigs Inside Live",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/cigs.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/drrrrrumerrrrrrr.mp3',
-    'Captain Brando!',
-    'drrrrrumerrrrrrr.mp3',
-    "2022",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/paint.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/somewhere.mp3',
-    'Captain Brando!',
-    'somewhere.mp3',
-    "2022",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/paint.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/comeback.mp3',
-    'Captain Brando!',
-    '(dont call it a) comeback!',
-    "2022",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/paint.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/whereyougoin.mp3',
-    'Captain Brando!',
-    'where you goin? (demo)',
-    "2022",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/paint.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/kernalPanic.mp3',
-    'Captain Brando!',
-    'kernal PANIC !!!',
-    "3RR0R 404",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/sailboat.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/paralyzedIn.mp3',
-    'Captain Brando!',
-    'Paralyzed (instrumental)',
-    "3RR0R 404",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/sailboat.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/PARALLEL.mp3',
-    'Captain Brando!',
-    'PARALLEL',
-    "3RR0R 404",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/sailboat.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/intro.mp3',
-    'brando & theo',
-    'intro',
-    "Criss Cross Apple Sauwce",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/dead.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/uponme.mp3',
-    'brando & theo',
-    'up on me',
-    "Criss Cross Apple Sauwce",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/dead.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/what.mp3',
-    'brando & theo',
-    '..what?',
-    "Criss Cross Apple Sauwce",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/dead.png'
-  ),
-  new Track(
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/recess.mp3',
-    'brando & theo',
-    'recess',
-    "Criss Cross Apple Sauwce",
-    'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/images/dead.png'
-  ),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/IDKOK.mp3',
+		'IDKOK',
+		'ily'
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/Instagram.mp3',
+		'Instagram',
+		'ily',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/him.mp3',
+		'him',
+		'ily',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/october13.mp3',
+		'October 13th',
+		'ily',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/him(demo).mp3',
+		'him (demo)',
+		'ily',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/down3-2.mp3',
+		'down3-2',
+		'RIP',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/paralyzed.mp3',
+		'Paralyzed Paraplegic',
+		'RIP',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/GiveIn.mp3',
+		'GiveIn_444',
+		'RIP',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/mental.mp3',
+		'mental health disorders',
+		'RIP',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/stab.mp3',
+		'stab.wav',
+		'RIP',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/WAITAMINUTE.mp3',
+		'WAITAMINUTE',
+		'RIP',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bargainbin.mp3',
+		'Bargain Bin',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bbetc.mp3',
+		'Better Better, etc.',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/bullshit.mp3',
+		'bullshit.mp3',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/jam2.mp3',
+		'jam2.mp3',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/feel.mp3',
+		'Feel It Still (remix)',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/passion.mp3',
+		'Passionfruit (remix)',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/assignment8.mp3',
+		'assignment8.mp3',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/panama.mp3',
+		'The Panama Papers',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/kenny.mp3',
+		'kenny.mp3',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/better44.mp3',
+		'better44.mp3',
+		'Altona Meadows (<= 2016)',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bulkhead.mp3',
+		'BULKHEAD',
+		'2022',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/alone.mp3',
+		'Alone (Mac DeMarco Cover)',
+		'Cigs Inside Live',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/how.mp3',
+		'How?',
+		'Cigs Inside Live',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/work.mp3',
+		'Work This Time (King Gizzard Cover)',
+		'Cigs Inside Live',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/liquor.mp3',
+		'Liquor Laced & Lucid',
+		'Cigs Inside Live',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/cigs/sleepwalk.mp3',
+		'Sleepwalk With Me',
+		'Cigs Inside Live',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/drrrrrumerrrrrrr.mp3',
+		'drrrrrumerrrrrrr.mp3',
+		'2022',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/somewhere.mp3',
+		'somewhere.mp3',
+		'2022',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/comeback.mp3',
+		'(dont call it a) comeback!',
+		'2022',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/whereyougoin.mp3',
+		'where you goin? (demo)',
+		'2022',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/error/kernalPanic.mp3',
+		'kernal PANIC !!!',
+		'3RR0R 404',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/error/paralyzedIn.mp3',
+		'Paralyzed (instrumental)',
+		'3RR0R 404',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/error/PARALLEL.mp3',
+		'PARALLEL',
+		'3RR0R 404',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/intro.mp3',
+		'intro',
+		'Criss Cross Apple Sauwce',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/uponme.mp3',
+		'up on me',
+		'Criss Cross Apple Sauwce',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/what.mp3',
+		'..what?',
+		'Criss Cross Apple Sauwce',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/recess.mp3',
+		'recess',
+		'Criss Cross Apple Sauwce',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/AVATAR1.mp3',
+		'AVATAR1.mp3',
+		'2022',
+	)
 ];

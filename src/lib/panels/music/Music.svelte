@@ -9,7 +9,6 @@
 	let trackNum: number = 0;
 	let lastTrackArray: number[] = [];
 
-	let showControls: boolean = false;
 	let isPlaying: boolean = false;
 
 	let audioPlayer: HTMLAudioElement;
@@ -161,16 +160,13 @@
 		loop: loop,
 		ended: ended,
 
-		isPlaying: isPlaying,
-		showControls: showControls
+		isPlaying: isPlaying
 	};
 </script>
 
 <div
 	ref="box"
 	id="musicBox"
-	on:mouseenter={() => (showControls = true)}
-	on:mouseleave={() => (showControls = false)}
 	on:mousemove={(e) => onMousemove(e)}
 >
 	<Visualizer {isPlaying} audioElement={audioPlayer} {scrollEvent} {mousePos} />

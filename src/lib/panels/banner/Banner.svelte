@@ -35,7 +35,7 @@
 	</div>
 </div>
 
-<style>
+<style lang='scss'>
 	.hide {
 		display: none;
 	}
@@ -56,9 +56,13 @@
 	p {
 		font-family: 'Montserrat', sans-serif;
 		width: 80%;
-		font-size: 4rem;
+		font-size: 4em;
 		padding-bottom: 7vh;
 		text-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+
+		&:hover {
+			cursor: default;
+		}
 	}
 
 	.flexin {
@@ -83,6 +87,12 @@
 
 		#emoji {
 			padding-top: 0px;
+		}
+	}
+
+	@media only screen and (max-width: 800px) {
+		p {
+			font-size: 2rem;
 		}
 	}
 </style>

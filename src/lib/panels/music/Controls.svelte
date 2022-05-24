@@ -17,7 +17,7 @@
 
 	export let track: Track;
 	export let isPlaying: boolean;
-	export let showControls: boolean;
+	let showControls: boolean;
 
 	export let shuffle: boolean;
 	export let loop: boolean;
@@ -95,8 +95,9 @@
 </script>
 
 <div ref="box" id="controlsBox">
-	<div>
-		{#if showControls}
+	<div on:mouseenter={() => (showControls = true)}
+		on:mouseleave={() => (showControls = false)}>
+		{#if (showControls) || (!showControls && list)}
 			{#if !list}
 			<div id="icons" transition:fade>
 				<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
@@ -119,7 +120,7 @@
 					<RepeatIcon size="100" />
 				</span>
 			</div>
-			{:else if list}
+			{:else}
 			<div id="list" transition:fade>
 				<div id="albums">
 					<ul>						
@@ -145,6 +146,7 @@
 				</div>
 			</div>
 			{/if}
+		{:else}
 		{/if}
 	</div>
 	<div id="seeker">
@@ -152,7 +154,7 @@
 			<img src={track.img} alt="" />
 		</div>
 		<div>
-			<div class="wide hover" on:click={() => {list = !list}}>
+			<div class="wide hover" on:click={() => {list = !list; (!showControls && list) ? showControls = true : showControls = false;}}>
 				{#if !list}
 				<ChevronUpIcon size="50" />
 				{:else}
