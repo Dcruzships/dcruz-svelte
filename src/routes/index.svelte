@@ -49,8 +49,6 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		min-height: 100vh;
-		min-height: -webkit-fill-available;
 	}
 
 	article {
@@ -58,7 +56,6 @@
 		scroll-snap-stop: always;
 		height: 92vh;
 		padding-top: 10px;
-		min-height: -webkit-fill-available;
 	}
 
 	main {
@@ -69,7 +66,6 @@
 		max-height: 100vh;
 		scroll-padding-top: 7vh;
 		overflow-x: hidden;
-		min-height: -webkit-fill-available;
 	}
 
 	#music {
@@ -122,7 +118,7 @@
 	@media only screen and (max-width: 800px) {
 		article {
 			// temp fix lol
-			height: 88vh;
+			height: 87vh;
 		}
 	}
 </style>
