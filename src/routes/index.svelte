@@ -58,6 +58,7 @@
 		scroll-snap-stop: always;
 		height: 92vh;
 		padding-top: 10px;
+		min-height: -webkit-fill-available;
 	}
 
 	main {
@@ -116,5 +117,12 @@
 		display: flex;
 		flex-direction: column;
 		padding-top: 0;
+	}
+
+	@media only screen and (max-width: 800px) {
+		article {
+			// temp fix lol
+			height: 88vh;
+		}
 	}
 </style>
