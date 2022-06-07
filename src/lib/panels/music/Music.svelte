@@ -21,6 +21,8 @@
 
 	let mousePos = { x: 500, y: 250 };
 
+	export let isMobile: boolean = false;
+
 	/**
 	 * Random track on launch
 	 */
@@ -170,7 +172,7 @@
 	on:mousemove={(e) => onMousemove(e)}
 >
 	<Visualizer {isPlaying} audioElement={audioPlayer} {scrollEvent} {mousePos} />
-	<Controls on:message={handleCmd} {...AudioInfo} />
+	<Controls on:message={handleCmd} {...AudioInfo} {isMobile} />
 </div>
 <audio
 	data-playing="no"
@@ -192,8 +194,5 @@
 		height: 100%;
 		display: flex;
 		justify-content: center;
-	}
-
-	@media only screen and (max-width: 800px) {
 	}
 </style>

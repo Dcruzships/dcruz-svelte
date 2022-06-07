@@ -8,16 +8,20 @@
 		SkipBackIcon,
 		SkipForwardIcon,
 		ChevronUpIcon,
-		ChevronDownIcon
+		ChevronDownIcon,
+PauseIcon,
+PlayIcon
 	} from 'svelte-feather-icons';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { type Track, type Album, tracks } from './tracks';
 	import { albums } from './tracks';
 	import RangeSlider from 'svelte-range-slider-pips';
 
+	export let isMobile: boolean;
+
 	export let track: Track;
 	export let isPlaying: boolean;
-	let showControls: boolean;
+	let showControls: boolean = true;
 
 	export let shuffle: boolean;
 	export let loop: boolean;
@@ -92,36 +96,43 @@
 		// If it's more than an hour, return the hour too. Otherwise, just the min:sec
 		return `${minutes}:${seconds}`;
 	}
+
+	function toggleList() {
+		list = !list;
+		(!showControls && list) ? showControls = true : showControls = false;
+	}
 </script>
 
 <div ref="box" id="controlsBox">
-	<div on:mouseenter={() => (showControls = true)}
+	<div id="boxie" on:mouseenter={() => (showControls = true)}
 		on:mouseleave={() => (showControls = false)}>
 		{#if (showControls) || (!showControls && list)}
 			{#if !list}
-			<div id="icons" transition:fade>
-				<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
-					<ShuffleIcon size="100" />
-				</span>
-				<span on:click={() => command('prev')}>
-					<SkipBackIcon size="100" />
-				</span>
-				<span on:click={() => command('playPause')}>
-					{#if isPlaying}
-						<PauseCircleIcon size="100" />
-					{:else}
-						<PlayCircleIcon size="100" />
-					{/if}
-				</span>
-				<span on:click={() => command('next')}>
-					<SkipForwardIcon size="100" />
-				</span>
-				<span on:click={() => command('loop')} class={loop ? 'active' : ''}>
-					<RepeatIcon size="100" />
-				</span>
-			</div>
+				{#if !isMobile}
+				<div class="icons" transition:fade>
+					<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
+						<ShuffleIcon size="100" />
+					</span>
+					<span on:click={() => command('prev')}>
+						<SkipBackIcon size="100" />
+					</span>
+					<span on:click={() => command('playPause')}>
+						{#if isPlaying}
+							<PauseCircleIcon size="100" />
+						{:else}
+							<PlayCircleIcon size="100" />
+						{/if}
+					</span>
+					<span on:click={() => command('next')}>
+						<SkipForwardIcon size="100" />
+					</span>
+					<span on:click={() => command('loop')} class={loop ? 'active' : ''}>
+						<RepeatIcon size="100" />
+					</span>
+				</div>
+				{/if}
 			{:else}
-			<div id="list" transition:fade>
+			<div id="list" in:fly="{{ y: 600, duration: 400 }}" out:fly="{{ y: 600, duration: 300 }}">
 				<div id="albums">
 					<ul>						
 						{#each albums as album}
@@ -149,19 +160,48 @@
 		{/if}
 	</div>
 	<div id="seeker">
-		<div id="img">
+		<div id="img" on:click={toggleList}>
 			<img src={track.img} alt="" />
 		</div>
-		<div>
-			<div class="wide hover" on:click={() => {list = !list; (!showControls && list) ? showControls = true : showControls = false;}}>
-				{#if !list}
-				<ChevronUpIcon size="50" />
+		<div id="controller">
+			<div class="wide hover">
+				{#if isMobile}
+				<span id="mobileControls" class="icons">
+					<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
+						<ShuffleIcon size="20" />
+					</span>
+					<span on:click={() => command('prev')}>
+						<SkipBackIcon size="30" />
+					</span>
+					<span on:click={() => command('playPause')}>
+						{#if isPlaying}
+							<PauseIcon size="30" />
+						{:else}
+							<PlayIcon size="30" />
+						{/if}
+					</span>
+					<span on:click={() => command('next')}>
+						<SkipForwardIcon size="30" />
+					</span>
+					<span on:click={() => command('loop')} class={loop ? 'active' : ''}>
+						<RepeatIcon size="20" />
+					</span>
+				</span>
 				{:else}
-				<ChevronDownIcon size="50" />
+				<span ref="box" on:click={toggleList}>
+					{#if !list}
+					<ChevronUpIcon size="50" />
+					{:else}
+					<ChevronDownIcon size="50" />
+					{/if}
+				</span>
 				{/if}
 			</div>
-			<div>
-				{track.artist} - {track.name}
+			<div ref="box" on:click={toggleList}>
+				{#if !isMobile}
+				{track.artist} - 
+				{/if}
+				{track.name}
 			</div>
 			<div id="seek">
 				<span>{_time}</span>
@@ -194,17 +234,24 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
-
-		div:first-child {
+		overflow: hidden;
+		max-height: 100%;
+		
+		#boxie {
 			height: 100%;
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
+			overflow: hidden;
+			max-height: 100%;
 		}
 	}
 
-	#icons {
+	.icons {
 		width: 70%;
+		align-items: center;
+		display: flex;
+		justify-content: space-around;
 
 		span {
 			transition: 0.3s;
@@ -220,7 +267,7 @@
 
 		.active {
 			color: red;
-
+	
 			&:hover {
 				color: red;
 				transform: scale(1.3);
@@ -231,7 +278,7 @@
 	#seeker {
 		display: flex;
 		align-items: flex-end;
-		margin-bottom: 12px;
+		padding: 12px;
 		justify-content: flex-start;
 		border-top: solid;
 
@@ -254,8 +301,14 @@
 		border: solid;
 	}
 
+	#img {
+		width: 100%;
+		height: 100%;
+		flex: 0.2;
+	}
+
 	#seek {
-		margin-bottom: 10px;
+		margin: 10px;
 
 		span {
 			display: flex;
@@ -291,17 +344,23 @@
 	#list {
 		width: 100%;
 		background-color: rgba(224, 226, 198, .8);
+		display: flex;
+		height: 100%;
 
 		#albums, #tracklist {
 			display: block;
 			height: 100%;
 			padding: 10px;
+			overflow: scroll;
+			height: 100%;
+			max-height: 100%;
 		}
 
 		li {
 			&:hover {
 				text-decoration: underline;
 				cursor: pointer;
+				color: red;
 			}
 		}
 
@@ -312,6 +371,12 @@
 				list-style: symbols(cyclic ">");
 				text-align: start;
 				padding: 5px;
+
+				&:hover {
+					text-decoration: underline;
+					cursor: pointer;
+					color: red;
+				}
 			}
 
 			.active {
@@ -327,6 +392,32 @@
 		.active {
 			font-weight: bold;
 			list-style: symbols(cyclic ">>");
+		}
+	}
+
+	#mobileControls {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		justify-content: space-around;
+		padding: .5em;
+		align-items: center;
+	}
+
+	#controller {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	@media only screen and (max-width: 800px) {
+		#list {
+			div:first-child {
+				flex: .8;
+			}
+		}
+
+		li {
+			padding: 5px;
 		}
 	}
 </style>

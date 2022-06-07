@@ -10,8 +10,12 @@
 	} from 'svelte-feather-icons';
 	import ScrollText from './ScrollText.svelte';
 
+	export let isMobile: boolean;
+
 	let src: string = 'img/bio1.png';
 	let numBio: number = 1;
+
+	$: logoSize = (isMobile) ? "30" : "60";
 
 	function randNum(): number {
 		return Math.floor(Math.random() * 3);
@@ -34,6 +38,7 @@
 	<div id="contactBox" class="gradient">
 		<div class="bars"><ScrollText /></div>
 		<div class="pics">
+			{#if !isMobile}
 			<div id="bio">
 				<img {src} alt="" on:click={randBio} />
                 <ul>
@@ -62,6 +67,7 @@
                     </li>
                 </ul>
 			</div>
+			{/if}
 			<div id="vid">
 				<iframe
 					_ngcontent-gfx-c87=""
@@ -77,25 +83,25 @@
 		</div>
 		<div class="bars">
 			<a href="https://www.facebook.com/cptnbrando" target="_blank">
-				<FacebookIcon size="60" />
+				<FacebookIcon size={logoSize} />
 			</a>
 			<a href="https://www.instagram.com/captainbrandooo/" target="_blank">
-				<InstagramIcon size="60" />
+				<InstagramIcon size={logoSize} />
 			</a>
 			<a href="https://twitter.com/captainbrandooo" target="_blank">
-				<TwitterIcon size="60" />
+				<TwitterIcon size={logoSize} />
 			</a>
 			<a href="https://github.com/cptnbrando" target="_blank">
-				<GithubIcon size="60" />
+				<GithubIcon size={logoSize} />
 			</a>
 			<a href="https://www.linkedin.com/in/dcruzships/" target="_blank">
-				<LinkedinIcon size="60" />
+				<LinkedinIcon size={logoSize} />
 			</a>
 			<a href="https://www.youtube.com/c/captainbrando" target="_blank">
-				<YoutubeIcon size="60" />
+				<YoutubeIcon size={logoSize} />
 			</a>
 			<a href="https://www.twitch.tv/captainbrandooo" target="_blank">
-				<TwitchIcon size="60" />
+				<TwitchIcon size={logoSize} />
 			</a>
 		</div>
 	</div>

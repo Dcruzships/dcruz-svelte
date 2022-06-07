@@ -50,7 +50,7 @@ export let albums: Album[] = [
 		'Captain Brando!'
 	),
 	new Album(
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 		'bbetc',
 		'Altona Meadows'
 	),
@@ -130,52 +130,52 @@ export const tracks: Track[] = [
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bargainbin.mp3',
 		'Bargain Bin',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bbetc.mp3',
 		'Better Better, etc.',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/bullshit.mp3',
 		'bullshit.mp3',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/jam2.mp3',
 		'jam2.mp3',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/feel.mp3',
 		'Feel It Still (remix)',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/passion.mp3',
 		'Passionfruit (remix)',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/assignment8.mp3',
 		'assignment8.mp3',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/panama.mp3',
 		'The Panama Papers',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/kenny.mp3',
 		'kenny.mp3',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/better44.mp3',
 		'better44.mp3',
-		'Altona Meadows (<= 2016)',
+		'Altona Meadows',
 	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bulkhead.mp3',

@@ -1,32 +1,43 @@
 <script lang="ts">
     import Contact from "$lib/panels/contact/Contact.svelte";
+	import { onMount } from "svelte";
 	import Navbar from "../lib/nav/Navbar.svelte";
 	import Banner from "../lib/panels/banner/Banner.svelte";
 	import Music from "../lib/panels/music/Music.svelte";
 	import Projects from "../lib/panels/projects/Projects.svelte";
 
 	let scrollEvent: any = null;
+	let isMobile: boolean = false;
 
 	function onScroll(event) {
 		scrollEvent = event;
 	}
+
+	function onResize() {
+		isMobile = (window.innerWidth < 800);
+	}
+
+	onMount(async () => {
+		onResize();
+	});
 </script>
 
-<main on:scroll={onScroll}>
+<svelte:window on:resize={onResize} />
+<main on:scroll={onScroll} on:resize={onResize}>
 	<article id="banner">
 		<Banner />
 	</article>
 
-	<Navbar />
+	<Navbar {isMobile} />
 
 	<article id="projects">
 		<Projects />
 	</article>
 	<article id="music">
-		<Music {scrollEvent} />
+		<Music {scrollEvent} {isMobile} />
 	</article>
 	<article id="contact">
-		<Contact />
+		<Contact {isMobile} />
 	</article>
 </main>
 
