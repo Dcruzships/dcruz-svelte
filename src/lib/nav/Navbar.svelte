@@ -4,7 +4,7 @@
 	import { fly, fade } from 'svelte/transition';
 
 	export let isMobile: boolean = false;
-	let show: boolean = true;
+	let show: boolean = false;
 	let size: string = "2x";
 </script>
 
