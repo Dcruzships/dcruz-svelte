@@ -164,7 +164,7 @@ PlayIcon
 			<img src={track.img} alt="" />
 		</div>
 		<div id="controller">
-			<div class="wide hover">
+			<div class="wide">
 				{#if isMobile}
 				<span id="mobileControls" class="icons">
 					<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
@@ -400,7 +400,8 @@ PlayIcon
 		width: 100%;
 		height: 100%;
 		justify-content: space-around;
-		padding: .5em;
+		padding-top: .5em;
+		padding-bottom: .5em;
 		align-items: center;
 	}
 

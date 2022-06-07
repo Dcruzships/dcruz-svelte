@@ -49,6 +49,8 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
 	}
 
 	article {
@@ -66,6 +68,7 @@
 		max-height: 100vh;
 		scroll-padding-top: 7vh;
 		overflow-x: hidden;
+		min-height: -webkit-fill-available;
 	}
 
 	#music {
