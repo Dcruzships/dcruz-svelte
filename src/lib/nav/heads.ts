@@ -98,5 +98,15 @@ export const heads: string[] = [
     "🏃‍♂️🤸‍♂️🕺",
     "🤙🤙🤙",
     "big yeet",
-    "100 emoji"
+    "100 emoji",
+    "movin",
+    "groovin",
+    "movin/groovin",
+    "big chillin",
+    "a menace",
+    "strange",
+    "crazy",
+    "everywhere",
+    "lost",
+    "laughing"
 ];

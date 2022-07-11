@@ -8,6 +8,8 @@
 
 	let scrollEvent: any = null;
 	let isMobile: boolean = false;
+	let articleHeight: any;
+	let navHeight: any;
 
 	function onScroll(event) {
 		scrollEvent = event;
@@ -15,6 +17,9 @@
 
 	function onResize() {
 		isMobile = (window.innerWidth < 800);
+		navHeight = window.innerHeight * 0.08;
+		navHeight = (navHeight < 50) ? 50 : navHeight; 
+		articleHeight = window.innerHeight - navHeight;
 	}
 
 	onMount(async () => {
@@ -23,20 +28,20 @@
 </script>
 
 <svelte:window on:resize={onResize} />
-<main on:scroll={onScroll} on:resize={onResize}>
-	<article id="banner">
+<main on:scroll={onScroll}>
+	<article id="banner" style="height: {articleHeight}px;">
 		<Banner />
 	</article>
 
-	<Navbar {isMobile} />
+	<Navbar {navHeight} {isMobile} />
 
-	<article id="projects">
+	<article id="projects" style="height: {articleHeight}px;">
 		<Projects />
 	</article>
-	<article id="music">
+	<article id="music" style="height: {articleHeight}px;">
 		<Music {scrollEvent} {isMobile} />
 	</article>
-	<article id="contact">
+	<article id="contact" style="height: {articleHeight}px;">
 		<Contact {isMobile} />
 	</article>
 </main>
@@ -113,12 +118,5 @@
 		display: flex;
 		flex-direction: column;
 		padding-top: 0;
-	}
-
-	@media only screen and (max-width: 800px) {
-		article {
-			// temp fix lol
-			height: 87vh;
-		}
 	}
 </style>

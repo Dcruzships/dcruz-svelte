@@ -101,48 +101,26 @@ PlayIcon
 		list = !list;
 		(!showControls && list) ? showControls = true : showControls = false;
 	}
+
+	const goBack: string = '<- go back';
 </script>
 
 <div ref="box" id="controlsBox">
-	<div id="boxie" on:mouseenter={() => (showControls = true)}
-		on:mouseleave={() => (showControls = false)}>
-		{#if (showControls) || (!showControls && list)}
-			{#if !list}
-				{#if !isMobile}
-				<div class="icons" transition:fade>
-					<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
-						<ShuffleIcon size="100" />
-					</span>
-					<span on:click={() => command('prev')}>
-						<SkipBackIcon size="100" />
-					</span>
-					<span on:click={() => command('playPause')}>
-						{#if isPlaying}
-							<PauseCircleIcon size="100" />
-						{:else}
-							<PlayCircleIcon size="100" />
-						{/if}
-					</span>
-					<span on:click={() => command('next')}>
-						<SkipForwardIcon size="100" />
-					</span>
-					<span on:click={() => command('loop')} class={loop ? 'active' : ''}>
-						<RepeatIcon size="100" />
-					</span>
-				</div>
-				{/if}
-			{:else}
+	<div id="boxie">
+		{#if (list)}
 			<div id="list" in:fly="{{ y: 600, duration: 400 }}" out:fly="{{ y: 600, duration: 300 }}">
 				<div id="albums">
 					<ul>						
 						{#each albums as album}
 						<li on:click={() => {selected = album}} class="{selected === album ? 'active' : ''}">
-							{album.name}
+							<img src={album.src} alt="" />
+							<span>{album.name}</span>
 						</li>
 						{/each}
 					</ul>
 				</div>
 				<div id="tracklist">
+					<span class="redHover">{goBack}</span>
 					<span>
 							<img src={selected.src} alt="" />
 							<h3>{selected.name} by {selected.artist}</h3>
@@ -156,48 +134,44 @@ PlayIcon
 					</ol>
 				</div>
 			</div>
-			{/if}
 		{/if}
 	</div>
 	<div id="seeker">
-		<div id="img" on:click={toggleList}>
+		<div id="img" on:click={toggleList} class="clickable redHover">
 			<img src={track.img} alt="" />
+			<span class={list ? 'red' : ''}>
+				{#if !list}
+				<ChevronUpIcon size="40" />
+				{:else}
+				<ChevronDownIcon class="red" size="40" />
+				{/if}
+			</span>
 		</div>
 		<div id="controller">
 			<div class="wide">
-				{#if isMobile}
 				<span id="mobileControls" class="icons">
-					<span on:click={() => command('shuffle')} class={shuffle ? 'active' : ''}>
-						<ShuffleIcon size="20" />
+					<span on:click={() => command('shuffle')} class={shuffle ? 'active button' : 'button'}>
+						<ShuffleIcon size="40" />
 					</span>
-					<span on:click={() => command('prev')}>
-						<SkipBackIcon size="30" />
+					<span class="button" on:click={() => command('prev')}>
+						<SkipBackIcon size="40" />
 					</span>
-					<span on:click={() => command('playPause')}>
+					<span class="button" on:click={() => command('playPause')}>
 						{#if isPlaying}
-							<PauseIcon size="30" />
+							<PauseIcon size="40" />
 						{:else}
-							<PlayIcon size="30" />
+							<PlayIcon size="40" />
 						{/if}
 					</span>
-					<span on:click={() => command('next')}>
-						<SkipForwardIcon size="30" />
+					<span class="button" on:click={() => command('next')}>
+						<SkipForwardIcon size="40" />
 					</span>
-					<span on:click={() => command('loop')} class={loop ? 'active' : ''}>
-						<RepeatIcon size="20" />
+					<span on:click={() => command('loop')} class={loop ? 'active button' : 'button'}>
+						<RepeatIcon size="40" />
 					</span>
 				</span>
-				{:else}
-				<span ref="box" on:click={toggleList}>
-					{#if !list}
-					<ChevronUpIcon size="50" />
-					{:else}
-					<ChevronDownIcon size="50" />
-					{/if}
-				</span>
-				{/if}
 			</div>
-			<div ref="box" on:click={toggleList}>
+			<div ref="box" class="clickable redHover" id="track" on:click={toggleList}>
 				{#if !isMobile}
 				{track.artist} - 
 				{/if}
@@ -226,6 +200,39 @@ PlayIcon
 </div>
 
 <style lang="scss">
+
+	$red: #E62020;
+
+	#albums {
+		ul {
+			margin: 0;
+			padding: 0;
+			li {
+				border: 1px solid $red;
+				display: flex;
+				align-items: center;
+				justify-content: left;
+
+				img {
+					width: 25px;
+					height: 25px;
+				}
+			}
+		}
+	}
+
+	.red {
+		color: $red;
+	}
+
+	.redHover {
+		transition: 0.2s;
+		&:hover {
+			cursor: pointer;
+			color: $red;
+		}
+	}
+
 	#controlsBox {
 		position: absolute;
 		top: 0;
@@ -251,7 +258,7 @@ PlayIcon
 		width: 70%;
 		align-items: center;
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
 
 		span {
 			transition: 0.3s;
@@ -261,18 +268,22 @@ PlayIcon
 			}
 
 			&:active {
-				color: red;
+				color: $red;
 			}
 		}
 
 		.active {
-			color: red;
+			color: $red;
 	
 			&:hover {
-				color: red;
+				color: $red;
 				transform: scale(1.3);
 			}
 		}
+	}
+
+	.button {
+		padding: .3rem;
 	}
 
 	#seeker {
@@ -305,6 +316,25 @@ PlayIcon
 		width: 100%;
 		height: 100%;
 		flex: 0.2;
+		position: relative;
+
+		img {
+			position: relative;
+			z-index: 1;
+		}
+
+		span {
+			position: absolute;
+			z-index: 10;
+			left: 33%;
+			top: 25%;
+		}
+	}
+
+	#track {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	#seek {
@@ -329,18 +359,6 @@ PlayIcon
 		width: 100%;
 	}
 
-	.hover {
-		transition: 0.3s;
-		&:hover {
-			color: gray;
-			transform: scale(1.3);
-		}
-
-		&:active {
-			color: red;
-		}
-	}
-
 	#list {
 		width: 100%;
 		background-color: rgba(224, 226, 198, .8);
@@ -360,7 +378,7 @@ PlayIcon
 			&:hover {
 				text-decoration: underline;
 				cursor: pointer;
-				color: red;
+				color: $red;
 			}
 		}
 
@@ -375,13 +393,14 @@ PlayIcon
 				&:hover {
 					text-decoration: underline;
 					cursor: pointer;
-					color: red;
+					color: $red;
 				}
 			}
 
 			.active {
 				font-weight: bold;
 				list-style: symbols(cyclic ">>");
+				border: 3px solid #9932CC;
 			}
 		}
 
@@ -399,7 +418,7 @@ PlayIcon
 		display: flex;
 		width: 100%;
 		height: 100%;
-		justify-content: space-around;
+		justify-content: center;
 		padding-top: .5em;
 		padding-bottom: .5em;
 		align-items: center;
@@ -410,15 +429,19 @@ PlayIcon
 		margin-right: 10px;
 	}
 
-	@media only screen and (max-width: 800px) {
-		#list {
-			div:first-child {
-				flex: .8;
-			}
-		}
-
-		li {
-			padding: 5px;
-		}
+	.clickable {
+		cursor: pointer;
 	}
+
+	// @media only screen and (max-width: 800px) {
+	// 	#list {
+	// 		div:first-child {
+	// 			flex: .8;
+	// 		}
+	// 	}
+
+	// 	li {
+	// 		padding: 5px;
+	// 	}
+	// }
 </style>

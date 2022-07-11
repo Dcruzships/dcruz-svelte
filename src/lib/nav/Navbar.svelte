@@ -4,11 +4,12 @@
 	import { fly, fade } from 'svelte/transition';
 
 	export let isMobile: boolean = false;
+	export let navHeight: any = 60;
 	let show: boolean = false;
 	let size: string = "2x";
 </script>
 
-<nav class="sticky" on:mouseenter={() => show = true} on:mouseleave={() => show = false}>
+<nav class="sticky" on:mouseenter={() => show = true} on:mouseleave={() => show = false} style="height: {navHeight}px;">
 	<span>
 		{#if show}
 		<ul in:fly="{{ x: -600, duration: 400, delay: 200 }}" out:fly="{{ x: -600, duration: 400 }}" class="buttons">

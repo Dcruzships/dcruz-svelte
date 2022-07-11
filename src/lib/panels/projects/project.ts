@@ -6,6 +6,7 @@ export class Project {
     description: string;
     tech: string;
     link: string;
+    pic: string;
 
     constructor(id: number, name: string, media: string, description: string, tech: string, link: string) {
         this.id = `vid${id}`;
@@ -15,5 +16,6 @@ export class Project {
         this.description = description
         this.tech = tech;
         this.link = link;
+        this.pic = `img/${media.substring(0, (media.length - 5))}.png`;
     }
 }
