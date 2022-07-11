@@ -433,15 +433,15 @@ PlayIcon
 		cursor: pointer;
 	}
 
-	// @media only screen and (max-width: 800px) {
-	// 	#list {
-	// 		div:first-child {
-	// 			flex: .8;
-	// 		}
-	// 	}
+	@media only screen and (max-width: 800px) {
+		#list {
+			div:first-child {
+				flex: .8;
+			}
+		}
 
-	// 	li {
-	// 		padding: 5px;
-	// 	}
-	// }
+		li {
+			padding: 5px;
+		}
+	}
 </style>
