@@ -28,7 +28,7 @@
 </script>
 
 <svelte:window on:resize={onResize} />
-<main on:scroll={onScroll}>
+<main on:scroll={onScroll} style="scroll-padding-top: {navHeight}px;">
 	<article id="banner" style="height: {articleHeight}px;">
 		<Banner />
 	</article>
@@ -69,7 +69,7 @@
 		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 		max-height: 100vh;
-		scroll-padding-top: 7vh;
+		scroll-padding-top: 8vh;
 		overflow-x: hidden;
 	}
 
