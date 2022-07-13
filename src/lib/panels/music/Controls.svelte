@@ -36,6 +36,8 @@ PlayIcon
 
 	$: selected, onSelect();
 
+	let stats: boolean = false;
+
 	function onSelect() {
 		selectedTracks = tracks.filter(track => {
 			return selected.name === track.album;
@@ -112,26 +114,40 @@ PlayIcon
 				<div id="albums">
 					<ul>						
 						{#each albums as album}
-						<li on:click={() => {selected = album}} class="{selected === album ? 'active' : ''}">
+						<li on:click={() => {selected = album; stats = false;}} class="{selected === album && !stats ? 'active' : ''}">
 							<img src={album.src} alt="" />
 							<span>{album.name}</span>
 						</li>
 						{/each}
+						<li on:click={() => {stats = !stats;}} class="{stats ? 'active' : 'colors'}">
+							<span>Stats</span>
+						</li>
 					</ul>
 				</div>
 				<div id="tracklist">
-					<span class="redHover">{goBack}</span>
-					<span>
-							<img src={selected.src} alt="" />
-							<h3>{selected.name} by {selected.artist}</h3>
-					</span>
-					<ol>
-						{#each selectedTracks as listTrack}
-						<li on:click={() => {chooseTrack(listTrack.name)}} class="{track.name === listTrack.name ? 'active' : ''}">
-							{listTrack.name}
-						</li>
-						{/each}
-					</ol>
+					{#if stats}
+						<span>Thanks for listening :)</span>
+						<p>Most songs written and performed by me except for the ones with friends 
+							<a href="https://www.instagram.com/honeydutheband/" target="_blank">(Cigs Inside is now 𝘩𝘰𝘯𝘦𝘺𝘥ü, check them out here)</a>
+						</p>
+						<p>All tracks recorded and produced by me in dorm rooms, cars, bars, airplanes, or Starbucks bathrooms</p>
+						<p>Nowadays I make music at my apt in plano, but I don't think my neighbors don't like my music</p>
+						<p>Feel free to download or remix anything you like, post it wherever too just please credit me</p>
+						<p>imma set up a message box here gimme a minute...</p>
+					{:else}
+						<!-- <span class="redHover">{goBack}</span> -->
+						<span>
+								<img src={selected.src} alt="" />
+								<h3>{selected.name} by {selected.artist}</h3>
+						</span>
+						<ol>
+							{#each selectedTracks as listTrack}
+							<li on:click={() => {chooseTrack(listTrack.name)}} class="{track.name === listTrack.name ? 'active' : ''}">
+								{listTrack.name}
+							</li>
+							{/each}
+						</ol>
+					{/if}
 				</div>
 			</div>
 		{/if}
@@ -389,6 +405,13 @@ PlayIcon
 				list-style: symbols(cyclic ">");
 				text-align: start;
 				padding: 5px;
+				border-left: 1px solid $red;
+				border-right: 1px solid $red;
+				border-bottom: 1px solid $red;
+
+				&:first-child {
+					border-top: 1px solid $red;
+				}
 
 				&:hover {
 					text-decoration: underline;

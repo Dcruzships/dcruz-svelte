@@ -4,7 +4,7 @@ export class Track {
 	name: string;
 	album: string;
 	img: string;
-  arrAlbum: Album;
+  	arrAlbum: Album;
 
 	constructor(src: string, name: string, album: string) {
     this.arrAlbum = albums.find(el => el.name === album);
@@ -24,7 +24,7 @@ export class Album {
 	name: string;
 	src: string;
 	artist: string;
-  tracks: Track[];
+  	tracks: Track[];
 
 	constructor(name: string, src: string, artist?: string, tracks?: string[]) {
 		this.name = name;
@@ -41,12 +41,12 @@ export let albums: Album[] = [
 	),
 	new Album(
 		'ily',
-    'ily',
+    	'ily',
 		'Captain Brando!'
 	),
 	new Album(
 		'RIP',
-    'rip',
+    	'rip',
 		'Captain Brando!'
 	),
 	new Album(
@@ -128,6 +128,11 @@ export const tracks: Track[] = [
 		'RIP',
 	),
 	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/better44.mp3',
+		'better44.mp3',
+		'RIP',
+	),
+	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/bargainbin.mp3',
 		'Bargain Bin',
 		'Altona Meadows',
@@ -170,11 +175,6 @@ export const tracks: Track[] = [
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/kenny.mp3',
 		'kenny.mp3',
-		'Altona Meadows',
-	),
-	new Track(
-		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/old/better44.mp3',
-		'better44.mp3',
 		'Altona Meadows',
 	),
 	new Track(
@@ -243,6 +243,21 @@ export const tracks: Track[] = [
 		'3RR0R 404',
 	),
 	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/AVATAR1.mp3',
+		'AVATAR1.mp3',
+		'3RR0R 404',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/error/playground.mp3',
+		'playground.mp3',
+		'3RR0R 404',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/error/kenny2.mp3',
+		'kenny2.mp3',
+		'3RR0R 404',
+	),
+	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/crossed/intro.mp3',
 		'intro',
 		'Criss Cross Apple Sauwce',
@@ -263,8 +278,13 @@ export const tracks: Track[] = [
 		'Criss Cross Apple Sauwce',
 	),
 	new Track(
-		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/AVATAR1.mp3',
-		'AVATAR1.mp3',
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/ILLFINDHER.mp3',
+		"I'LL FIND HER",
+		'2022',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2022/life.mp3',
+		'life.mp3',
 		'2022',
 	)
 ];
