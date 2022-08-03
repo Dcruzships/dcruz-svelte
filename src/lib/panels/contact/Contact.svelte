@@ -13,12 +13,13 @@
 	export let isMobile: boolean;
 
 	let src: string = 'img/bio1.png';
+	let totalBio: number = 5;
 	let numBio: number = 1;
 
 	$: logoSize = (isMobile) ? "30" : "60";
 
 	function randNum(): number {
-		return Math.floor(Math.random() * 3);
+		return Math.floor(Math.random() * totalBio);
 	}
 
 	function randBio() {
@@ -45,19 +46,19 @@
                     <li>Brandon Dcruz aka Captain Brando!</li>
                     <li>Age: 23</li>
                     <li>Origin: Altona Meadows, Victoria, Australia </li>
-                    <li>Occupation: Software Engineer at Revature</li>
+                    <li>Occupation: Software Engineer at Revature + Cognizant</li>
                     <li>Education: B.A.S.c in Creative Digital Media from the Rochester Institute of Technology 2020</li>
-                    <li>Relationship: Taken</li>
-                    <li>Instruments: Drums, Guitar, Piano, Ableton 10</li>
+                    <li>Musical Instruments: Drums, Guitar, Piano, Ableton 10</li>
+                    <li>Current Mood: Happier than ever before</li>
                     <br />
-                    <li>Software Fields
+                    <li>Proficient Software Fields
                         <ul>
                             <li>Spring Boot</li>
-                            <li>PostgresQL</li>
-                            <li>AWS Services - EC2, RDBMS</li>
-                            <li>Docker</li>
+                            <li>PostgresQL / OracleDB</li>
+                            <li>AWS Services - EC2, RDBMS, Route 53, Lambda</li>
+                            <li>Docker + Kubernetes</li>
                             <li>HTML 5 / CSS / JS</li>
-                            <li>Angular 12</li>
+                            <li>Angular</li>
                             <li>React JS / React Native</li>
                             <li>Svelte</li>
                             <li>Spotify API</li>
