@@ -35,6 +35,11 @@ export class Album {
 
 export let albums: Album[] = [
 	new Album(
+		'2023',
+		'chase',
+		'The Cut Ties'
+	),
+	new Album(
 		'2022',
 		'paint',
 		'Captain Brando!'
@@ -72,6 +77,51 @@ export let albums: Album[] = [
 ];
 
 export const tracks: Track[] = [
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/2bedroomtoyota.mp3',
+		'2 Bedroom Toyota',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/BEGIN.mp3',
+		'BEGIN!',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/Lamborghini.mp3',
+		'Lamborghini',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/drive.mp3',
+		'Right Side',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/eyes.mp3',
+		'eyesss.mp3',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/problems.mp3',
+		'PROBLEMS',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/shoulda_cutTies.mp3',
+		'shoulda (cut ties)',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/spanish.mp3',
+		'spanish!',
+		'2023',
+	),
+	new Track(
+		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/2023/velvet.mp3',
+		'Velvet',
+		'2023',
+	),
 	new Track(
 		'https://raw.githubusercontent.com/dcruzships/dcruz-assets/master/music/IDKOK.mp3',
 		'IDKOK',
